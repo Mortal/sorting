@@ -45,16 +45,8 @@ int main(int argc, char **argv) {
         v[i] = prng();
 
     STXXL_MSG("Sorting (using " << (memory >> 20) << " MiB of memory)...");
-	timeval before;
-	gettimeofday(&before, 0);
+	sorttimer _(n_records, sizeof(type));
     stxxl::sort(v.begin(), v.end(), cmp(), memory);
-	timeval after;
-	gettimeofday(&after, 0);
-
-	double seconds = after - before;
-	double MiB = double(n_records * sizeof(type)) / double(1 << 20);
-
-	STXXL_MSG("Sorted " << n_records << " elements of size " << sizeof(type) << " (total " << (MiB / 1024) << " GiB) in " << seconds << " seconds, " << (double(n_records) / seconds) << " items/sec " << (MiB / seconds) << " MiB/s");
 
     return 0;
 }

@@ -19,3 +19,22 @@ double operator - (const timeval & a, const timeval & b)
 	return double(sec) + double(usec) / 1000000.;
 }
 
+struct sorttimer {
+	sorttimer(size_t n, size_t size) : n(n), size(size) {
+		gettimeofday(&before, 0);
+	}
+	~sorttimer() {
+		timeval after;
+		gettimeofday(&after, 0);
+
+		double seconds = after - before;
+		double MiB = double(n * sizeof(type)) / double(1 << 20);
+
+		std::cout << "Sorted " << n << " elements of size " << size << " (total " << (MiB / 1024) << " GiB) in " << seconds << " seconds, " << (double(n) / seconds) << " items/sec " << (MiB / seconds) << " MiB/s" << std::endl;
+	}
+private:
+	timeval before;
+	size_t n;
+	size_t size;
+};
+

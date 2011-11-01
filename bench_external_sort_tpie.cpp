@@ -1,10 +1,5 @@
 // -*- mode: c++; tab-width: 4; indent-tabs-mode: t; c-file-style: "stroustrup"; -*-
 // vi:set ts=4 sts=4 sw=4 noet cino+=(0 :
-#include <tpie/tpie.h>
-#include <tpie/sort.h>
-#include <tpie/stream.h>
-
-#include "common.h"
 
 #ifdef SORTING_MEMORY
 // from tpie/test/blocksize2MB.h:
@@ -19,6 +14,12 @@
 	#endif
 #endif
 
+#include "common.h"
+
+#include <tpie/tpie.h>
+#include <tpie/sort.h>
+#include <tpie/stream.h>
+
 using namespace tpie;
 
 void sort_test(size_t n, int seed = 42) {
@@ -30,20 +31,9 @@ void sort_test(size_t n, int seed = 42) {
 		mystream.write_item(x);
 	}
 
-	timeval before;
-	gettimeofday(&before, 0);
-
 	std::cout << "tpie::ami::sort()" << std::endl;
+	sorttimer _(n, sizeof(type));
 	ami::sort(&mystream);
-	mystream.seek(0);
-
-	timeval after;
-	gettimeofday(&after, 0);
-
-	double seconds = after - before;
-	double MiB = double(n * sizeof(type)) / double(1 << 20);
-
-	std::cout << "Sorted " << n << " elements of size " << sizeof(type) << " (total " << (MiB / 1024) << " GiB) in " << seconds << " seconds, " << (double(n) / seconds) << " items/sec " << (MiB / seconds) << " MiB/s" << std::endl;
 }
 
 
