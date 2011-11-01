@@ -28,8 +28,16 @@
 #include <boost/random/linear_congruential.hpp>
 
 #ifdef SORTING_MEMORY
-// from tpie:
-#include <test/blocksize2MB.h>
+// from tpie/test/blocksize2MB.h:
+
+	// Define logical block size factor (default is 32)
+	// This yields a 2 MB block size
+	#ifdef WIN32
+		// the block size on windows is larger than on linux,
+		#define STREAM_UFS_BLOCK_FACTOR 32
+	#else
+		#define STREAM_UFS_BLOCK_FACTOR 512
+	#endif
 #endif
 
 typedef int type;
