@@ -27,6 +27,11 @@
 #include <sys/time.h>
 #include <boost/random/linear_congruential.hpp>
 
+#ifdef SORTING_MEMORY
+// from tpie:
+#include <test/blocksize2MB.h>
+#endif
+
 typedef int type;
 
 double operator - (const timeval & a, const timeval & b)
