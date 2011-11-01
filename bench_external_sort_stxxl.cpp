@@ -36,7 +36,6 @@ int main(int argc, char **argv) {
 #if STXXL_PARALLEL_MULTIWAY_MERGE
     STXXL_MSG("STXXL_PARALLEL_MULTIWAY_MERGE");
 #endif
-    unsigned long long memory_to_use = 4096L * 1024 * 1024;
     typedef stxxl::vector<type> vector_type;
 
     vector_type v(n_records);
@@ -45,10 +44,10 @@ int main(int argc, char **argv) {
     for (vector_type::size_type i = 0; i < v.size(); i++)
         v[i] = prng();
 
-    STXXL_MSG("Sorting (using " << (memory_to_use >> 20) << " MiB of memory)...");
+    STXXL_MSG("Sorting (using " << (memory >> 20) << " MiB of memory)...");
 	timeval before;
 	gettimeofday(&before, 0);
-    stxxl::sort(v.begin(), v.end(), cmp(), memory_to_use);
+    stxxl::sort(v.begin(), v.end(), cmp(), memory);
 	timeval after;
 	gettimeofday(&after, 0);
 

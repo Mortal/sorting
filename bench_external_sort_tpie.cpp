@@ -58,8 +58,9 @@ int main(int argc, char **argv) {
 	if (argc > 2)
 		seed = atoi(argv[2]);
 
+	std::cout << "Memory limit: " << (memory >> 20) << " MiB" << std::endl;
 	tpie::tpie_init();
-	tpie::get_memory_manager().set_limit(4096L*1024*1024);
+	tpie::get_memory_manager().set_limit(memory);
 	sort_test(n, seed);
 }
 

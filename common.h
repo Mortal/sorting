@@ -6,6 +6,8 @@
 
 typedef int type;
 
+const size_t memory = 2L * 1024 * 1024 * 1024;
+
 double operator - (const timeval & a, const timeval & b)
 {
 	long sec = a.tv_sec - b.tv_sec;
