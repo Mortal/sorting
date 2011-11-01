@@ -1,0 +1,5 @@
+.*.swp
+/bench_external_sort-filestream
+/bench_external_sort-memory
+/bench_external_sort-stxxl
+/bench_external_sort_stxxl.pmstxxl_boost.o
